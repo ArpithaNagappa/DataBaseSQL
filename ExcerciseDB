@@ -1,0 +1,59 @@
+CREATE TABLE seeds (
+   seed_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+   crop VARCHAR(40),
+   encourages VARCHAR(80),
+   use_by INTEGER
+);
+
+INSERT INTO seeds (crop, encourages, use_by)
+VALUES ("Agastache", "bees & hummingbirds", 2020);
+
+INSERT INTO seeds (crop, encourages, use_by)
+VALUES ("Sunflower", "birds ", 2021);
+
+INSERT INTO seeds (crop, use_by)
+VALUES ("Sun Gold Tomato", 2022);
+
+INSERT INTO seeds (crop, encourages, use_by)
+VALUES ("Zinnia", "bees", 2020);
+
+INSERT INTO seeds (crop)
+VALUES ("Rutabaga");
+
+INSERT INTO seeds (crop, use_by)
+VALUES ("Sun Gold Tomato", 2024);
+
+INSERT INTO seeds (crop, encourages, use_by)
+VALUES ("Green Beans", "Cucumber", 2020);
+SELECT * FROM seeds;
+SELECT crop FROM seeds;
+
+SELECT crop,use_by FROM seeds ORDER BY use_by DESC, crop ASC;
+SELECT * FROM seeds WHERE seed_id =2 ;
+
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE seeds SET encourages= "bird" WHERE seed_id =5;
+
+UPDATE seeds SET encourages= "bird", use_by = 2021 WHERE seed_id =4;
+
+ALTER TABLE seeds ADD expired BOOL;
+SET SQL_SAFE_UPDATES = 0;
+UPDATE seeds SET expired = 	true WHERE use_by <=2024;
+SET SQL_SAFE_UPDATES = 1;
+SELECT * FROM seeds;
+
+
+DELETE  FROM seeds WHERE seed_id = 1;
+
+DELETE FROM seeds WHERE expired = 1 OR use_by = 2021;
+
+SELECT * FROM seeds WHERE encourages IS NOT NULL;
+
+SELECT DISTINCT crop FROM seeds;
+
+ALTER TABLE seeds MODIFY COLUMN expired INTEGER;
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE seeds SET expired = 2021 WHERE seed_id = 5;
+SET SQL_SAFE_UPDATES = 1;
